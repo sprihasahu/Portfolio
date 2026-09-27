@@ -1,1265 +1,2683 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spriha Sahu | AWS Cloud & Web Developer | CS Engineer</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+
+    <title>Spriha Sahu | AWS Cloud & Web Developer</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Custom Tailwind Configuration: Sourcedesk Inspired Light Corporate Palette -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            25: '#FCFDFF',
-                            50: '#F8FAFC',
-                            100: '#F1F5F9',
-                            200: '#E2E8F0',
-                            300: '#CBD5E1',
-                            400: '#94A3B8',
-                            500: '#64748B',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1E293B',
-                            900: '#0F172A',
-                            950: '#020617'
-                        },
-                        brand: {
-                            blue: '#0066FF',
-                            cyan: '#0EA5E9',
-                            sky: '#0284C7',
-                            lightBg: '#F0F7FF',
-                            softBorder: '#DBEAFE'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace']
-                    }
-                }
-            }
-        }
-    </script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
 
     <style>
-        /* Light mode custom scrollbars and UI shadows */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F8FAFC;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #CBD5E1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0066FF;
+        :root {
+            --blue: #0066ff;
+            --sky: #0284c7;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --heading: #0f172a;
+            --text: #475569;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --light-blue: #eff6ff;
+            --shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
         }
 
-        .sd-glass-light {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+        * {
+            box-sizing: border-box;
         }
 
-        .sd-card-light {
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
         }
 
-        .sd-card-light:hover {
-            border-color: #93C5FD;
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 4px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--heading);
+            line-height: 1.25;
+            margin-top: 0;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section-white {
+            background: var(--white);
+            border-block: 1px solid var(--border);
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 45px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(28px, 4vw, 38px);
+            margin: 16px 0 12px;
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .section-heading::after {
+            content: "";
+            display: block;
+            width: 48px;
+            height: 4px;
+            margin: 20px auto 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--blue), #38bdf8);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border: 1px solid #bfdbfe;
+            border-radius: 999px;
+            background: var(--light-blue);
+            color: #1d4ed8;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 30px -10px rgba(0, 102, 255, 0.12), 0 10px 15px -5px rgba(15, 23, 42, 0.04);
+            border-color: #93c5fd;
+            box-shadow: 0 18px 35px rgba(0, 102, 255, 0.09);
         }
 
-        .text-gradient-brand {
-            background: linear-gradient(135deg, #0F172A 0%, #0066FF 60%, #0284C7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.5;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .text-gradient-blue {
-            background: linear-gradient(135deg, #0066FF 0%, #0284C7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-sd-primary {
-            background: linear-gradient(135deg, #0066FF 0%, #0284C7 100%);
-            color: #FFFFFF;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.25);
-        }
-
-        .btn-sd-primary:hover {
-            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        .button:hover {
             transform: translateY(-2px);
         }
 
-        .btn-sd-secondary {
-            background: #FFFFFF;
-            color: #0F172A;
-            border: 1px solid #E2E8F0;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+        .button-primary {
+            color: white;
+            background: linear-gradient(135deg, var(--blue), var(--sky));
+            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.2);
         }
 
-        .btn-sd-secondary:hover {
-            background: #F8FAFC;
-            border-color: #CBD5E1;
-            color: #0066FF;
-            transform: translateY(-1px);
+        .button-secondary {
+            color: var(--heading);
+            background: white;
+            border-color: var(--border);
         }
 
-        .canvas-bg {
+        .button-secondary:hover {
+            color: var(--blue);
+            border-color: #93c5fd;
+        }
+
+        .button-full {
+            width: 100%;
+        }
+
+        .button-small {
+            padding: 9px 14px;
+            font-size: 12px;
+        }
+
+        .button-row,
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 10px;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 11px;
+            color: #334155;
+        }
+
+        .icon-box {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue);
+            background: #dbeafe;
+            font-size: 19px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(
+                135deg,
+                #0f172a 0%,
+                #0066ff 60%,
+                #0284c7 100%
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navigation */
+
+        .site-header {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0 0 auto;
+            z-index: 50;
+            background: rgba(248, 250, 252, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            min-height: 82px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--blue), #0ea5e9);
+            color: white;
+            font-size: 17px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .brand-name {
+            display: block;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--heading);
+            line-height: 1.4;
+        }
+
+        .brand-subtitle {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: var(--blue);
+            text-transform: uppercase;
+        }
+
+        .desktop-nav {
+            display: flex;
+            gap: 3px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 6px;
+        }
+
+        .desktop-nav a {
+            padding: 8px 11px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 999px;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--blue);
+            background: var(--light-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .menu-button {
+            display: none;
+            padding: 9px 12px;
+            background: white;
+            color: var(--heading);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 19px;
+        }
+
+        .mobile-menu {
+            padding: 8px 20px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 9px 14px;
+            font-size: 14px;
+            border-radius: 9px;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--blue);
+            background: var(--light-blue);
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 100vh;
+            padding: 150px 0 85px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background-image: radial-gradient(
+                rgba(0, 102, 255, 0.08) 1px,
+                transparent 1px
+            );
+            background-size: 28px 28px;
+        }
+
+        #particleCanvas {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
             pointer-events: none;
         }
 
-        .hero-pattern-light {
-            background-image: radial-gradient(rgba(0, 102, 255, 0.08) 1.2px, transparent 1.2px);
-            background-size: 28px 28px;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            margin: 22px 0;
+            font-size: clamp(40px, 5.4vw, 68px);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -2.5px;
+        }
+
+        .hero-description {
+            max-width: 640px;
+            font-size: 16px;
+            margin-bottom: 26px;
+        }
+
+        .hero .tags {
+            margin-bottom: 30px;
+        }
+
+        .hero .tag {
+            background: white;
+            padding: 8px 11px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+            font-size: 23px;
+            color: var(--muted);
+        }
+
+        .social-links a:hover {
+            color: var(--blue);
+        }
+
+        .profile-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 22px;
+            margin-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-heading .brand-logo {
+            width: 56px;
+            height: 56px;
+            font-size: 22px;
+        }
+
+        .profile-heading h2 {
+            font-size: 22px;
+            margin: 0 0 5px;
+        }
+
+        .profile-heading p {
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .profile-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border-radius: 16px;
+            background: var(--background);
+            border: 1px solid var(--border);
+        }
+
+        .profile-item small {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .profile-item strong,
+        .profile-item a {
+            display: block;
+            font-size: 12px;
+            color: var(--heading);
+            overflow-wrap: anywhere;
+        }
+
+        .availability {
+            margin: 20px 0 0;
+            text-align: center;
+            font-size: 12px;
+            color: #047857;
+        }
+
+        /* About */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 26px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 23px;
+        }
+
+        .card-title h3 {
+            font-size: 23px;
+            margin: 0;
+        }
+
+        .competencies {
+            margin-top: 25px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+        }
+
+        .small-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .education-item {
+            border-left: 2px solid #bfdbfe;
+            padding: 0 0 25px 20px;
+        }
+
+        .education-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .education-item span {
+            font-size: 11px;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .education-item h4 {
+            font-size: 16px;
+            margin: 7px 0;
+        }
+
+        .education-item p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* Skills */
+
+        .skill-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 9px;
+            margin-bottom: 35px;
+        }
+
+        .skill-filter {
+            border-radius: 999px;
+        }
+
+        .skill-filter[aria-pressed="true"] {
+            background: var(--blue);
+            color: white;
+            border-color: var(--blue);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .skill-card {
+            padding: 23px;
+            border-radius: 18px;
+        }
+
+        .skill-top {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .skill-card h3 {
+            font-size: 15px;
+            margin: 0 0 5px;
+        }
+
+        .skill-card p {
+            font-size: 11px;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* Experience */
+
+        .experience-list {
+            max-width: 900px;
+            margin-inline: auto;
+            display: grid;
+            gap: 26px;
+        }
+
+        .experience-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .experience-header h3 {
+            margin: 12px 0 6px;
+            font-size: 25px;
+        }
+
+        .experience-header p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .duration {
+            align-self: center;
+            font-size: 11px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            padding: 7px 12px;
+            border-radius: 10px;
+        }
+
+        .check-list {
+            padding: 0;
+            list-style: none;
+            margin: 0 0 22px;
+        }
+
+        .check-list li {
+            display: flex;
+            gap: 10px;
+            font-size: 13px;
+            margin-bottom: 13px;
+        }
+
+        .check-list i {
+            color: var(--blue);
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        /* Projects */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card h3 {
+            font-size: 25px;
+            margin: 21px 0 10px;
+        }
+
+        .project-tech {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .project-description {
+            font-size: 13px;
+            margin-bottom: 26px;
+        }
+
+        .project-actions {
+            display: grid;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        /* Certifications */
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .certification-card {
+            padding: 24px;
+            border-radius: 18px;
+        }
+
+        .certification-card .icon-box {
+            margin-bottom: 20px;
+        }
+
+        .certification-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .certification-card p {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .certification-card small {
+            color: var(--blue);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Contact */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 26px;
+            align-items: start;
+        }
+
+        .contact-grid h3 {
+            font-size: 25px;
+        }
+
+        .contact-intro {
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+
+        .contact-details {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .contact-details small {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .contact-details a,
+        .contact-details strong {
+            font-size: 12px;
+            color: var(--heading);
+            overflow-wrap: anywhere;
+        }
+
+        .copy-button {
+            flex-shrink: 0;
+            padding: 8px 10px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            color: var(--muted);
+        }
+
+        .copy-button:hover {
+            color: var(--blue);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: var(--heading);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            background: var(--background);
+            color: var(--heading);
+            font-size: 13px;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--blue);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .form-note {
+            font-size: 11px;
+            color: var(--muted);
+            margin: 13px 0 0;
+        }
+
+        /* Footer */
+
+        footer {
+            padding: 30px 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-content p {
+            margin: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .footer-links a:hover {
+            color: var(--blue);
+        }
+
+        /* Toast */
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 200;
+            width: max-content;
+            max-width: calc(100% - 32px);
+            padding: 13px 22px;
+            border-radius: 14px;
+            background: var(--heading);
+            color: white;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.2);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* Project dialog */
+
+        dialog {
+            width: min(650px, calc(100% - 32px));
+            max-height: 85vh;
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            color: var(--text);
+            background: white;
+            box-shadow: 0 25px 80px rgba(15, 23, 42, 0.25);
+        }
+
+        dialog::backdrop {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            width: 34px;
+            height: 34px;
+            border: 0;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: var(--heading);
+        }
+
+        .modal-title {
+            font-size: 26px;
+            margin: 20px 30px 15px 0;
+        }
+
+        .modal-description {
+            font-size: 13px;
+        }
+
+        .modal-actions {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive layout */
+
+        @media (max-width: 1100px) {
+            .desktop-nav,
+            .header-actions {
+                display: none;
+            }
+
+            .menu-button {
+                display: inline-flex;
+            }
+
+            .hero-grid {
+                gap: 30px;
+            }
+
+            .certifications-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 850px) {
+            .hero-grid,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-description {
+                margin-inline: auto;
+            }
+
+            .hero .tags,
+            .hero .button-row,
+            .hero .social-links {
+                justify-content: center;
+            }
+
+            .profile-card {
+                max-width: 500px;
+                width: 100%;
+                margin-inline: auto;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            .section {
+                padding: 65px 0;
+            }
+
+            .navbar {
+                min-height: 74px;
+            }
+
+            .hero {
+                padding-top: 125px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+                letter-spacing: -1.8px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .hero .button-row {
+                flex-direction: column;
+            }
+
+            .card {
+                padding: 23px;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .certifications-grid,
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .contact-item {
+                gap: 9px;
+                padding: 11px;
+            }
+
+            .contact-item .icon-box {
+                width: 36px;
+                height: 36px;
+                font-size: 15px;
+            }
+
+            dialog {
+                padding: 25px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
         }
     </style>
 </head>
-<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-blue-500 selection:text-white min-h-screen flex flex-col">
 
-    <!-- Light Interactive Canvas Particles Background -->
-    <canvas id="particleCanvas" class="canvas-bg"></canvas>
+<body>
+    <!-- Navigation -->
+    <header class="site-header">
+        <div class="container navbar">
+            <a href="#home" class="brand" aria-label="Spriha Sahu home">
+                <span class="brand-logo">SS</span>
 
-    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                
-                <!-- Brand Logo -->
-                <a href="#home" class="flex items-center space-x-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-blue-500/20 transition-transform duration-300 group-hover:scale-105">
-                        SS
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-lg font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
-                            Spriha Sahu<span class="text-blue-600">.</span>
-                        </span>
-                        <span class="text-[10px] font-mono text-blue-600 tracking-wider uppercase">AWS & Web Engineer</span>
-                    </div>
+                <span>
+                    <span class="brand-name">Spriha Sahu.</span>
+                    <span class="brand-subtitle">AWS & Web Engineer</span>
+                </span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main navigation">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+            </nav>
+
+            <div class="header-actions">
+                <a
+                    href="https://github.com/sprihasahu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button button-secondary button-small"
+                >
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    GitHub
                 </a>
 
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex items-center space-x-1 sd-glass-light px-5 py-2 rounded-full shadow-sm">
-                    <a href="#home" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Home</a>
-                    <a href="#about" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">About</a>
-                    <a href="#skills" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Skills</a>
-                    <a href="#experience" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Experience</a>
-                    <a href="#projects" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Projects</a>
-                    <a href="#certifications" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all">Certifications</a>
-                </nav>
-
-                <!-- Header GitHub & Contact Buttons -->
-                <div class="hidden md:flex items-center space-x-3">
-                    <a href="https://github.com/sprihasahu" target="_blank" rel="noopener noreferrer" class="btn-sd-secondary px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2">
-                        <i class="fab fa-github text-sm"></i>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="#contact" class="btn-sd-primary px-4 py-2 rounded-xl font-semibold text-xs tracking-wide flex items-center gap-2">
-                        <span>Get in Touch</span>
-                        <i class="fas fa-arrow-right text-[10px]"></i>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Toggle Button -->
-                <div class="flex items-center space-x-2 md:hidden">
-                    <button id="mobileMenuBtn" class="p-2.5 rounded-xl sd-glass-light text-slate-700 hover:text-blue-600">
-                        <i class="fas fa-bars text-xl" id="menuBtnIcon"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Dropdown Navigation -->
-        <div id="mobileMenu" class="hidden md:hidden sd-glass-light border-b border-slate-200 px-4 pt-2 pb-6 space-y-2">
-            <a href="#home" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Home</a>
-            <a href="#about" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">About</a>
-            <a href="#skills" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Skills</a>
-            <a href="#experience" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Experience</a>
-            <a href="#projects" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Projects</a>
-            <a href="#certifications" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Certifications</a>
-            <a href="#contact" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Contact</a>
-            <div class="pt-2 grid grid-cols-2 gap-2">
-                <a href="https://github.com/sprihasahu" target="_blank" rel="noopener noreferrer" class="text-center block px-4 py-2.5 rounded-xl btn-sd-secondary text-xs font-semibold">
-                    <i class="fab fa-github mr-1"></i> GitHub
+                <a
+                    href="#contact"
+                    class="button button-primary button-small"
+                >
+                    Get in Touch
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
                 </a>
-                <a href="#contact" class="text-center block px-4 py-2.5 rounded-xl btn-sd-primary text-xs font-semibold">Contact</a>
             </div>
+
+            <button
+                type="button"
+                class="menu-button"
+                id="mobileMenuBtn"
+                aria-label="Open navigation"
+                aria-controls="mobileMenu"
+                aria-expanded="false"
+            >
+                <i
+                    class="fas fa-bars"
+                    id="menuBtnIcon"
+                    aria-hidden="true"
+                ></i>
+            </button>
         </div>
+
+        <nav
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-label="Mobile navigation"
+            hidden
+        >
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#contact">Contact</a>
+            <a
+                href="https://github.com/sprihasahu"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+        </nav>
     </header>
 
-    <section id="home" class="min-h-screen pt-32 pb-20 flex items-center justify-center relative overflow-hidden hero-pattern-light">
-        <!-- Ambient Soft Radial Glows -->
-        <div class="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-400/10 rounded-full filter blur-[120px] pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sky-400/10 rounded-full filter blur-[120px] pointer-events-none"></div>
+    <main>
+        <!-- Home -->
+        <section class="hero" id="home">
+            <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Hero Left Column -->
-                <div class="lg:col-span-7 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 mb-6 text-xs text-blue-700 font-mono">
-                        <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
-                        <span>Computer Science & Cloud Engineer</span>
-                    </div>
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <span class="badge">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        Computer Science & Cloud Engineer
+                    </span>
 
-                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-slate-900">
-                        Building Scalable <br class="hidden sm:inline" />
-                        <span class="text-gradient-brand">Cloud & Web Solutions</span>
+                    <h1>
+                        Building Scalable<br>
+                        <span class="text-gradient">
+                            Cloud & Web Solutions
+                        </span>
                     </h1>
 
-                    <p class="text-base sm:text-lg text-slate-600 font-normal leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
-                        Engineered with expertise in <strong class="text-slate-900">AWS Infrastructure (CDK Python)</strong>, CI/CD pipelines with <strong class="text-slate-900">GitHub Actions</strong>, responsive web interfaces, and graph-based data analysis.
+                    <p class="hero-description">
+                        Engineered with expertise in
+                        <strong>AWS Infrastructure (CDK Python)</strong>,
+                        CI/CD pipelines with <strong>GitHub Actions</strong>,
+                        responsive web interfaces, and graph-based data
+                        analysis.
                     </p>
 
-                    <!-- Tech Badges -->
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-10">
-                        <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-mono flex items-center gap-2 shadow-sm">
-                            <i class="fab fa-aws text-amber-500"></i> AWS Cloud & CDK
+                    <div class="tags">
+                        <span class="tag">
+                            <i class="fab fa-aws" aria-hidden="true"></i>
+                            AWS Cloud & CDK
                         </span>
-                        <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-mono flex items-center gap-2 shadow-sm">
-                            <i class="fab fa-python text-blue-600"></i> Python Automation
+
+                        <span class="tag">
+                            <i class="fab fa-python" aria-hidden="true"></i>
+                            Python Automation
                         </span>
-                        <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-mono flex items-center gap-2 shadow-sm">
-                            <i class="fas fa-code text-cyan-600"></i> HTML5, CSS3 & JS
+
+                        <span class="tag">
+                            <i class="fas fa-code" aria-hidden="true"></i>
+                            HTML5, CSS3 & JS
                         </span>
-                        <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-mono flex items-center gap-2 shadow-sm">
-                            <i class="fas fa-database text-indigo-600"></i> SQL
+
+                        <span class="tag">
+                            <i class="fas fa-database" aria-hidden="true"></i>
+                            SQL
                         </span>
                     </div>
 
-                    <!-- Call To Action Buttons -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <a href="#projects" class="w-full sm:w-auto px-8 py-3.5 rounded-xl btn-sd-primary font-semibold text-sm flex items-center justify-center gap-3">
-                            <i class="fas fa-rocket"></i>
-                            <span>View Projects</span>
+                    <div class="button-row">
+                        <a href="#projects" class="button button-primary">
+                            <i class="fas fa-rocket" aria-hidden="true"></i>
+                            View Projects
                         </a>
-                        <a href="https://github.com/sprihasahu" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 rounded-xl btn-sd-secondary font-semibold text-sm flex items-center justify-center gap-3">
-                            <i class="fab fa-github text-slate-800 text-base"></i>
-                            <span>GitHub Profile</span>
-                        </a>
-                    </div>
 
-                    <!-- Social Contact Quick Links -->
-                    <div class="mt-10 flex items-center justify-center lg:justify-start space-x-6 text-slate-500">
-                        <a href="https://github.com/sprihasahu" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition-colors text-2xl" title="GitHub Profile">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/spriha-sahu-81bb60257" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition-colors text-2xl" title="LinkedIn Profile">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:sprihasahu@gmail.com" class="hover:text-blue-600 transition-colors text-2xl" title="Email Spriha">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="tel:+918235430590" class="hover:text-emerald-600 transition-colors text-2xl" title="Call Spriha">
-                            <i class="fas fa-phone"></i>
+                        <a
+                            href="https://github.com/sprihasahu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button button-secondary"
+                        >
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            GitHub Profile
                         </a>
                     </div>
-                </div>
 
-                <!-- Hero Right Card Panel -->
-                <div class="lg:col-span-5 flex justify-center">
-                    <div class="relative w-full max-w-md">
-                        <div class="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-blue-500 to-sky-400 blur opacity-25"></div>
-                        
-                        <div class="relative sd-card-light rounded-3xl p-8 space-y-6">
-                            <div class="flex items-center space-x-4 border-b border-slate-100 pb-6">
-                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center text-white text-xl font-extrabold shadow-md shadow-blue-500/30">
-                                    SS
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold text-slate-900">Spriha Sahu</h3>
-                                    <p class="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
-                                        <i class="fas fa-location-dot text-rose-500"></i> Jamshedpur, Jharkhand, India
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Resume Details Cards -->
-                            <div class="space-y-3.5">
-                                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center space-x-3.5">
-                                    <div class="p-2.5 rounded-xl bg-blue-100 text-blue-600">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-[10px] uppercase font-mono text-slate-400">Education</p>
-                                        <p class="text-xs font-semibold text-slate-800">B.Tech in Computer Science</p>
-                                    </div>
-                                </div>
-
-                                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center space-x-3.5">
-                                    <div class="p-2.5 rounded-xl bg-sky-100 text-sky-600">
-                                        <i class="fas fa-cloud"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-[10px] uppercase font-mono text-slate-400">Specialization</p>
-                                        <p class="text-xs font-semibold text-slate-800">AWS DevOps, CDK & Web Development</p>
-                                    </div>
-                                </div>
-
-                                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center space-x-3.5">
-                                    <div class="p-2.5 rounded-xl bg-emerald-100 text-emerald-600">
-                                        <i class="fab fa-github"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-[10px] uppercase font-mono text-slate-400">GitHub Repository</p>
-                                        <a href="https://github.com/sprihasahu" target="_blank" class="text-xs font-semibold text-blue-600 hover:underline">github.com/sprihasahu</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="pt-2">
-                                <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-700 font-mono text-center">
-                                    <i class="fas fa-check-circle mr-1.5 text-emerald-600"></i> Open for Engineering Roles
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-24 relative bg-white border-y border-slate-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-mono text-blue-600 uppercase tracking-widest px-3 py-1 rounded-full bg-blue-50 border border-blue-200">About Me</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Professional Summary</h2>
-                <div class="w-12 h-1 bg-gradient-to-r from-blue-600 to-sky-400 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- Summary Card -->
-                <div class="lg:col-span-7 sd-card-light rounded-3xl p-8 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center space-x-3 mb-6">
-                            <div class="p-3 rounded-xl bg-blue-100 text-blue-600">
-                                <i class="fas fa-user-check text-xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900">Background</h3>
-                        </div>
-                        <p class="text-slate-600 leading-relaxed mb-6 text-base">
-                            I am a Computer Science Engineering student with practical experience building modern web applications, orchestrating cloud infrastructure with <strong class="text-slate-900">AWS CDK Python</strong>, and establishing automated CI/CD workflows using <strong class="text-slate-900">GitHub Actions</strong>.
-                        </p>
-                        <p class="text-slate-600 leading-relaxed">
-                            My technical background spans frontend engineering with <strong class="text-slate-900">HTML5, CSS3, JavaScript</strong>, database management with <strong class="text-slate-900">SQL</strong>, and complex graph analytics using <strong class="text-slate-900">NetworkX, Spectral Clustering, and Gephi</strong> for algorithmic plagiarism detection.
-                        </p>
-                    </div>
-
-                    <!-- Soft Skills Chips -->
-                    <div class="mt-8 border-t border-slate-100 pt-6">
-                        <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4">Core Competencies</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700">Teamwork</span>
-                            <span class="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700">Creative Thinking</span>
-                            <span class="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700">Quick Learning</span>
-                            <span class="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700">Team Management</span>
-                            <span class="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700">Problem Solving</span>
-                            <span class="px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700">Communication</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Education Card -->
-                <div class="lg:col-span-5 sd-card-light rounded-3xl p-8">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="p-3 rounded-xl bg-sky-100 text-sky-600">
-                            <i class="fas fa-graduation-cap text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900">Education</h3>
-                    </div>
-
-                    <div class="space-y-6 relative before:absolute before:left-3.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-200">
-                        <!-- Degree -->
-                        <div class="relative pl-8">
-                            <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-blue-600 border-4 border-white shadow"></div>
-                            <span class="text-xs font-mono text-blue-600 font-semibold">Undergraduate Engineering</span>
-                            <h4 class="text-lg font-bold text-slate-900 mt-1">B.Tech in Computer Science</h4>
-                            <p class="text-sm text-slate-600">Techno India University, Kolkata</p>
-                        </div>
-
-                        <!-- Class XII -->
-                        <div class="relative pl-8">
-                            <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-sky-500 border-4 border-white shadow"></div>
-                            <span class="text-xs font-mono text-sky-600 font-semibold">Class XII (CBSE) - 2022</span>
-                            <h4 class="text-base font-semibold text-slate-900 mt-1">Senior Secondary Education</h4>
-                            <p class="text-sm text-slate-600">Vidya Bharati Chinmaya Vidyalaya</p>
-                        </div>
-
-                        <!-- Class X -->
-                        <div class="relative pl-8">
-                            <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-indigo-500 border-4 border-white shadow"></div>
-                            <span class="text-xs font-mono text-indigo-600 font-semibold">Class X (CBSE) - 2020</span>
-                            <h4 class="text-base font-semibold text-slate-900 mt-1">Secondary Education</h4>
-                            <p class="text-sm text-slate-600">Vidya Bharati Chinmaya Vidyalaya</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="py-24 relative bg-[#F8FAFC]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-xs font-mono text-blue-600 uppercase tracking-widest px-3 py-1 rounded-full bg-blue-50 border border-blue-200">Technical Stack</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Skills & Tools</h2>
-                <p class="text-slate-500 text-sm mt-2">Focused on AWS Cloud, Web Engineering, Python, SQL & DevOps.</p>
-                <div class="w-12 h-1 bg-gradient-to-r from-blue-600 to-sky-400 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <!-- Category Filter Buttons -->
-            <div class="flex flex-wrap justify-center gap-2 mb-12">
-                <button onclick="filterSkills('all')" class="skill-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold btn-sd-primary shadow-sm transition-all">
-                    All Skills
-                </button>
-                <button onclick="filterSkills('cloud')" class="skill-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold btn-sd-secondary transition-all">
-                    Cloud & DevOps
-                </button>
-                <button onclick="filterSkills('programming')" class="skill-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold btn-sd-secondary transition-all">
-                    Programming & DB
-                </button>
-                <button onclick="filterSkills('web')" class="skill-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold btn-sd-secondary transition-all">
-                    Web Development
-                </button>
-                <button onclick="filterSkills('tools')" class="skill-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold btn-sd-secondary transition-all">
-                    Tools & Security
-                </button>
-            </div>
-
-            <!-- Skills Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="skillsGrid">
-                
-                <!-- AWS Cloud -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="cloud">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-amber-100 text-amber-600">
-                            <i class="fab fa-aws text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">AWS Infrastructure</h3>
-                            <p class="text-xs text-slate-500">S3, CloudFront, Route 53</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-amber-500 to-amber-400 h-full rounded-full" style="width: 85%;"></div>
-                    </div>
-                </div>
-
-                <!-- AWS CDK -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="cloud">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-blue-100 text-blue-600">
-                            <i class="fas fa-cubes text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">AWS CDK (Python)</h3>
-                            <p class="text-xs text-slate-500">Infrastructure as Code</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-blue-600 to-sky-400 h-full rounded-full" style="width: 82%;"></div>
-                    </div>
-                </div>
-
-                <!-- GitHub Actions -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="cloud">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-emerald-100 text-emerald-600">
-                            <i class="fab fa-github text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">GitHub Actions</h3>
-                            <p class="text-xs text-slate-500">CI/CD Automation Pipelines</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: 80%;"></div>
-                    </div>
-                </div>
-
-                <!-- Python -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="programming">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-sky-100 text-sky-600">
-                            <i class="fab fa-python text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">Python</h3>
-                            <p class="text-xs text-slate-500">NetworkX, Spectral Clustering, CDK</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-blue-600 to-sky-500 h-full rounded-full" style="width: 88%;"></div>
-                    </div>
-                </div>
-
-                <!-- SQL -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="programming">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-indigo-100 text-indigo-600">
-                            <i class="fas fa-database text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">SQL</h3>
-                            <p class="text-xs text-slate-500">Relational Database Queries</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full rounded-full" style="width: 80%;"></div>
-                    </div>
-                </div>
-
-                <!-- HTML5 & CSS3 -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="web">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-orange-100 text-orange-600">
-                            <i class="fab fa-html5 text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">HTML5 & CSS3</h3>
-                            <p class="text-xs text-slate-500">Responsive Responsive UI Layouts</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-orange-500 to-amber-500 h-full rounded-full" style="width: 90%;"></div>
-                    </div>
-                </div>
-
-                <!-- JavaScript -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="web">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-yellow-100 text-yellow-600">
-                            <i class="fab fa-js text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">JavaScript (ES6+)</h3>
-                            <p class="text-xs text-slate-500">Interactive Web Applications</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-yellow-500 to-amber-500 h-full rounded-full" style="width: 85%;"></div>
-                    </div>
-                </div>
-
-                <!-- Git, Figma & Blender -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="tools">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-purple-100 text-purple-600">
-                            <i class="fab fa-git-alt text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">Git, Figma & Blender</h3>
-                            <p class="text-xs text-slate-500">Version Control & UI Design Tools</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-full rounded-full" style="width: 82%;"></div>
-                    </div>
-                </div>
-
-                <!-- Cybersecurity -->
-                <div class="skill-card sd-card-light p-6 rounded-2xl" data-category="tools">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="p-3 rounded-xl bg-rose-100 text-rose-600">
-                            <i class="fas fa-shield-halved text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">Cybersecurity Basics</h3>
-                            <p class="text-xs text-slate-500">Core Security Fundamentals</p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-gradient-to-r from-rose-500 to-pink-500 h-full rounded-full" style="width: 75%;"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="py-24 relative bg-white border-y border-slate-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-mono text-blue-600 uppercase tracking-widest px-3 py-1 rounded-full bg-blue-50 border border-blue-200">Career Experience</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Professional Experience</h2>
-                <div class="w-12 h-1 bg-gradient-to-r from-blue-600 to-sky-400 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="max-w-4xl mx-auto space-y-8">
-                <!-- Pexous Internship -->
-                <div class="sd-card-light p-8 rounded-3xl relative overflow-hidden">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-slate-100 pb-6">
-                        <div>
-                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-blue-50 text-blue-700 border border-blue-200">
-                                Remote Summer Internship
-                            </span>
-                            <h3 class="text-2xl font-bold text-slate-900 mt-2">Pexous LLC</h3>
-                            <p class="text-sm font-semibold text-blue-600">Cloud & DevOps Summer Intern</p>
-                        </div>
-                        <div class="text-xs font-mono text-slate-500 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
-                            1 Month Duration
-                        </div>
-                    </div>
-
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-blue-600 mt-1"></i>
-                            <span>Completed an internship focused on AWS cloud architecture, DevOps, and Agile methodologies.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-blue-600 mt-1"></i>
-                            <span>Built and deployed cloud infrastructure stacks using <strong class="text-slate-900">AWS CDK with Python</strong>.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-blue-600 mt-1"></i>
-                            <span>Established automated CI/CD deployment pipelines utilizing <strong class="text-slate-900">GitHub Actions</strong>.</span>
-                        </li>
-                    </ul>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-xs text-slate-700 font-mono">AWS CDK</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-xs text-slate-700 font-mono">Python</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-xs text-slate-700 font-mono">GitHub Actions</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-xs text-slate-700 font-mono">Agile Methodologies</span>
-                    </div>
-                </div>
-
-                <!-- Content Creation -->
-                <div class="sd-card-light p-8 rounded-3xl relative overflow-hidden">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-slate-100 pb-6">
-                        <div>
-                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-purple-50 text-purple-700 border border-purple-200">
-                                International Project
-                            </span>
-                            <h3 class="text-2xl font-bold text-slate-900 mt-2">YouTube & AI Content Creation</h3>
-                            <p class="text-sm font-semibold text-purple-600">Singapore Client</p>
-                        </div>
-                    </div>
-
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-purple-600 mt-1"></i>
-                            <span>Created AI-assisted video content workflows for a Singapore-based client's YouTube channel.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-purple-600 mt-1"></i>
-                            <span>Designed video scripts and scene-by-scene prompts to streamline AI content creation.</span>
-                        </li>
-                    </ul>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-xs text-slate-700 font-mono">Prompt Workflows</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-xs text-slate-700 font-mono">Scripting</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-100 text-xs text-slate-700 font-mono">AI Content</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-24 relative bg-[#F8FAFC]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-mono text-blue-600 uppercase tracking-widest px-3 py-1 rounded-full bg-blue-50 border border-blue-200">Featured Work</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Projects Portfolio</h2>
-                <div class="w-12 h-1 bg-gradient-to-r from-blue-600 to-sky-400 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Project 1: MusiNet -->
-                <div class="sd-card-light rounded-3xl overflow-hidden flex flex-col justify-between">
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-blue-50 text-blue-700 border border-blue-200">
-                                Capstone Project
-                            </span>
-                            <i class="fas fa-diagram-project text-blue-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900 mb-2">MusiNet</h3>
-                        <p class="text-xs text-slate-500 mb-4 font-mono">Python | NetworkX | Gephi</p>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-6">
-                            Graph-based music plagiarism detection system for 1,000+ Hindi songs using Python and NetworkX. Applied Spectral Clustering to detect song communities and rendered visualizations in Gephi.
-                        </p>
-                    </div>
-
-                    <div class="p-8 pt-0">
-                        <button onclick="openProjectModal('musinet')" class="w-full py-3 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white font-semibold text-xs transition-all border border-blue-200 flex items-center justify-center gap-2">
-                            <span>View Architecture & Details</span>
-                            <i class="fas fa-arrow-right text-[10px]"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Project 2: Pixel Craft -->
-                <div class="sd-card-light rounded-3xl overflow-hidden flex flex-col justify-between">
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-sky-50 text-sky-700 border border-sky-200">
-                                Web Studio Platform
-                            </span>
-                            <i class="fas fa-laptop-code text-sky-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Pixel Craft</h3>
-                        <p class="text-xs text-slate-500 mb-4 font-mono">HTML5 | CSS3 | JavaScript</p>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-6">
-                            Developed a responsive web platform featuring modern UI components and dynamic interactive features with full cross-device compatibility.
-                        </p>
-                    </div>
-
-                    <div class="p-8 pt-0 space-y-2">
-                        <a href="https://sprihasahu.github.io/Pixelcraft-studio/" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl btn-sd-primary font-semibold text-xs flex items-center justify-center gap-2">
-                            <i class="fas fa-external-link-alt text-[10px]"></i>
-                            <span>Live Platform</span>
+                    <div class="social-links">
+                        <a
+                            href="https://github.com/sprihasahu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub profile"
+                        >
+                            <i class="fab fa-github" aria-hidden="true"></i>
                         </a>
-                        <button onclick="openProjectModal('pixelcraft')" class="w-full py-2.5 rounded-xl btn-sd-secondary font-semibold text-xs flex items-center justify-center gap-2">
-                            <i class="fas fa-info-circle text-blue-600"></i>
-                            <span>Project Details</span>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Project 3: Prime Digital Services -->
-                <div class="sd-card-light rounded-3xl overflow-hidden flex flex-col justify-between">
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-50 text-indigo-700 border border-indigo-200">
-                                Corporate Website
-                            </span>
-                            <i class="fas fa-globe text-indigo-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Prime Digital Services</h3>
-                        <p class="text-xs text-slate-500 mb-4 font-mono">HTML5 | CSS3 | JavaScript</p>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-6">
-                            Built the official website for Prime Digital Services showcasing digital marketing offerings, structured service pages, company overview, and interactive contact channels.
-                        </p>
-                    </div>
-
-                    <div class="p-8 pt-0 space-y-2">
-                        <a href="https://primedigitalservices.com" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl btn-sd-primary font-semibold text-xs flex items-center justify-center gap-2">
-                            <i class="fas fa-external-link-alt text-[10px]"></i>
-                            <span>primedigitalservices.com</span>
+                        <a
+                            href="https://linkedin.com/in/spriha-sahu-81bb60257"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn profile"
+                        >
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
                         </a>
-                        <button onclick="openProjectModal('primedigital')" class="w-full py-2.5 rounded-xl btn-sd-secondary font-semibold text-xs flex items-center justify-center gap-2">
-                            <i class="fas fa-info-circle text-blue-600"></i>
-                            <span>Project Details</span>
-                        </button>
+
+                        <a
+                            href="mailto:sprihasahu@gmail.com"
+                            aria-label="Email Spriha"
+                        >
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                        </a>
+
+                        <a
+                            href="tel:+918235430590"
+                            aria-label="Call Spriha"
+                        >
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </section>
+                <aside class="card profile-card" aria-label="Profile summary">
+                    <div class="profile-heading">
+                        <span class="brand-logo">SS</span>
 
-    <section id="certifications" class="py-24 relative bg-white border-y border-slate-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-mono text-blue-600 uppercase tracking-widest px-3 py-1 rounded-full bg-blue-50 border border-blue-200">Qualifications</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Certifications & Coursework</h2>
-                <div class="w-12 h-1 bg-gradient-to-r from-blue-600 to-sky-400 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Cert 1 -->
-                <div class="sd-card-light p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg mb-4">
-                            <i class="fab fa-google"></i>
+                        <div>
+                            <h2>Spriha Sahu</h2>
+                            <p>
+                                <i
+                                    class="fas fa-location-dot"
+                                    aria-hidden="true"
+                                ></i>
+                                Jamshedpur, Jharkhand, India
+                            </p>
                         </div>
-                        <h3 class="text-base font-bold text-slate-900 mb-2">Gemini with Google Cloud</h3>
-                        <p class="text-xs text-slate-500 mb-4">AI-driven cloud application development.</p>
                     </div>
-                    <span class="text-[10px] font-mono text-blue-600 font-semibold"><i class="fas fa-certificate mr-1"></i> Google Cloud</span>
-                </div>
 
-                <!-- Cert 2 -->
-                <div class="sd-card-light p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-lg mb-4">
-                            <i class="fas fa-pen-nib"></i>
+                    <div class="profile-item">
+                        <div class="icon-box">
+                            <i
+                                class="fas fa-graduation-cap"
+                                aria-hidden="true"
+                            ></i>
                         </div>
-                        <h3 class="text-base font-bold text-slate-900 mb-2">UI/UX Design</h3>
-                        <p class="text-xs text-slate-500 mb-4">Website design using prompt workflows.</p>
-                    </div>
-                    <span class="text-[10px] font-mono text-purple-600 font-semibold"><i class="fas fa-certificate mr-1"></i> Design Certification</span>
-                </div>
 
-                <!-- Cert 3 -->
-                <div class="sd-card-light p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg mb-4">
-                            <i class="fas fa-brain"></i>
+                        <div>
+                            <small>Education</small>
+                            <strong>B.Tech in Computer Science</strong>
                         </div>
-                        <h3 class="text-base font-bold text-slate-900 mb-2">Prompt Engineering</h3>
-                        <p class="text-xs text-slate-500 mb-4">Effective prompt design for LLMs.</p>
                     </div>
-                    <span class="text-[10px] font-mono text-amber-600 font-semibold"><i class="fas fa-certificate mr-1"></i> Great Learning</span>
-                </div>
 
-                <!-- Cert 4 -->
-                <div class="sd-card-light p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg mb-4">
-                            <i class="fas fa-cloud"></i>
+                    <div class="profile-item">
+                        <div class="icon-box">
+                            <i class="fas fa-cloud" aria-hidden="true"></i>
                         </div>
-                        <h3 class="text-base font-bold text-slate-900 mb-2">Innovating with Google Cloud AI</h3>
-                        <p class="text-xs text-slate-500 mb-4">Fundamentals of AI/ML on Google Cloud.</p>
+
+                        <div>
+                            <small>Specialization</small>
+                            <strong>AWS DevOps, CDK & Web Development</strong>
+                        </div>
                     </div>
-                    <span class="text-[10px] font-mono text-emerald-600 font-semibold"><i class="fas fa-certificate mr-1"></i> Google Cloud AI</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="contact" class="py-24 relative bg-[#F8FAFC]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-mono text-blue-600 uppercase tracking-widest px-3 py-1 rounded-full bg-blue-50 border border-blue-200">Get in Touch</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Contact Spriha Sahu</h2>
-                <div class="w-12 h-1 bg-gradient-to-r from-blue-600 to-sky-400 mx-auto mt-4 rounded-full"></div>
-            </div>
+                    <div class="profile-item">
+                        <div class="icon-box">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                        </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                
-                <!-- Contact Info Cards -->
-                <div class="lg:col-span-5 sd-card-light rounded-3xl p-8 space-y-6">
-                    <h3 class="text-2xl font-bold text-slate-900">Reach Out</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        I am available for software engineering roles, cloud infrastructure projects, and full-stack web engineering.
+                        <div>
+                            <small>GitHub</small>
+                            <a
+                                href="https://github.com/sprihasahu"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                github.com/sprihasahu
+                            </a>
+                        </div>
+                    </div>
+
+                    <p class="availability">
+                        <i class="fas fa-circle-check" aria-hidden="true"></i>
+                        Open to opportunities
                     </p>
-
-                    <!-- GitHub Button -->
-                    <a href="https://github.com/sprihasahu" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between hover:bg-blue-50 transition-all group">
-                        <div class="flex items-center space-x-3">
-                            <div class="p-3 rounded-xl bg-slate-900 text-white group-hover:bg-blue-600 transition-colors">
-                                <i class="fab fa-github text-lg"></i>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-mono text-slate-400">GitHub Profile</p>
-                                <p class="text-xs font-bold text-slate-800 group-hover:text-blue-600">github.com/sprihasahu</p>
-                            </div>
-                        </div>
-                        <i class="fas fa-external-link-alt text-xs text-slate-400 group-hover:text-blue-600"></i>
-                    </a>
-
-                    <!-- Copy Email -->
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
-                        <div class="flex items-center space-x-3 overflow-hidden">
-                            <div class="p-3 rounded-xl bg-blue-100 text-blue-600 flex-shrink-0">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="truncate">
-                                <p class="text-[10px] font-mono text-slate-400">Email Address</p>
-                                <p class="text-xs font-bold text-slate-800 truncate">sprihasahu@gmail.com</p>
-                            </div>
-                        </div>
-                        <button onclick="copyText('sprihasahu@gmail.com', 'Email copied to clipboard!')" class="p-2.5 rounded-xl bg-white border border-slate-200 hover:bg-blue-600 text-slate-600 hover:text-white transition-all flex-shrink-0" title="Copy Email">
-                            <i class="fas fa-copy text-xs"></i>
-                        </button>
-                    </div>
-
-                    <!-- Copy Phone -->
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="p-3 rounded-xl bg-emerald-100 text-emerald-600">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-mono text-slate-400">Phone</p>
-                                <p class="text-xs font-bold text-slate-800">+91-8235430590</p>
-                            </div>
-                        </div>
-                        <button onclick="copyText('+918235430590', 'Phone number copied to clipboard!')" class="p-2.5 rounded-xl bg-white border border-slate-200 hover:bg-emerald-600 text-slate-600 hover:text-white transition-all" title="Copy Phone">
-                            <i class="fas fa-copy text-xs"></i>
-                        </button>
-                    </div>
-
-                    <!-- Location -->
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center space-x-3">
-                        <div class="p-3 rounded-xl bg-rose-100 text-rose-600">
-                            <i class="fas fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] font-mono text-slate-400">Location</p>
-                            <p class="text-xs font-bold text-slate-800">Jamshedpur, Jharkhand, India</p>
-                        </div>
-                    </div>
-
-                    <div class="pt-2">
-                        <a href="https://linkedin.com/in/spriha-sahu-81bb60257" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl btn-sd-secondary text-slate-800 font-semibold text-xs flex items-center justify-center gap-2">
-                            <i class="fab fa-linkedin text-blue-600 text-sm"></i>
-                            <span>Connect on LinkedIn</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Contact Form Simulator -->
-                <div class="lg:col-span-7 sd-card-light rounded-3xl p-8">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-6">Send a Message</h3>
-                    <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-mono text-slate-700 mb-2" for="senderName">Name</label>
-                                <input type="text" id="senderName" required placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-mono text-slate-700 mb-2" for="senderEmail">Email</label>
-                                <input type="email" id="senderEmail" required placeholder="your@email.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 text-xs">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-mono text-slate-700 mb-2" for="subject">Subject</label>
-                            <input type="text" id="subject" required placeholder="Job Opportunity / Inquiry" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 text-xs">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-mono text-slate-700 mb-2" for="message">Message</label>
-                            <textarea id="message" rows="5" required placeholder="Your message details..." class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 text-xs resize-none"></textarea>
-                        </div>
-
-                        <button type="submit" id="submitBtn" class="w-full py-3.5 rounded-xl btn-sd-primary font-semibold text-xs flex items-center justify-center gap-2">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>Send Message</span>
-                        </button>
-                    </form>
-                </div>
-
+                </aside>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="border-t border-slate-200 py-10 bg-white text-slate-500 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>&copy; 2026 Spriha Sahu. Portfolio Website.</p>
-            <div class="flex items-center space-x-6">
-                <a href="https://github.com/sprihasahu" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition-colors flex items-center gap-1">
-                    <i class="fab fa-github"></i> GitHub
+        <!-- About -->
+        <section class="section section-white" id="about">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="badge">ABOUT ME</span>
+                    <h2>Professional Summary</h2>
+                </div>
+
+                <div class="about-grid">
+                    <article class="card">
+                        <div class="card-title">
+                            <div class="icon-box">
+                                <i
+                                    class="fas fa-user-check"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <h3>Background</h3>
+                        </div>
+
+                        <p>
+                            I am a Computer Science Engineering student with
+                            practical experience building modern web
+                            applications, orchestrating cloud infrastructure
+                            with <strong>AWS CDK Python</strong>, and
+                            establishing automated CI/CD workflows using
+                            <strong>GitHub Actions</strong>.
+                        </p>
+
+                        <p>
+                            My technical background spans frontend engineering
+                            with <strong>HTML5, CSS3, JavaScript</strong>,
+                            database management with <strong>SQL</strong>,
+                            and graph analytics using
+                            <strong>
+                                NetworkX, Spectral Clustering, and Gephi
+                            </strong>
+                            for music similarity analysis.
+                        </p>
+
+                        <div class="competencies">
+                            <p class="small-label">Core Competencies</p>
+
+                            <div class="tags">
+                                <span class="tag">Teamwork</span>
+                                <span class="tag">Creative Thinking</span>
+                                <span class="tag">Quick Learning</span>
+                                <span class="tag">Team Management</span>
+                                <span class="tag">Problem Solving</span>
+                                <span class="tag">Communication</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-title">
+                            <div class="icon-box">
+                                <i
+                                    class="fas fa-graduation-cap"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <h3>Education</h3>
+                        </div>
+
+                        <div class="education-item">
+                            <span>Undergraduate Engineering</span>
+                            <h4>B.Tech in Computer Science</h4>
+                            <p>Techno India University, Kolkata</p>
+                        </div>
+
+                        <div class="education-item">
+                            <span>Class XII (CBSE) — 2022</span>
+                            <h4>Senior Secondary Education</h4>
+                            <p>Vidya Bharati Chinmaya Vidyalaya</p>
+                        </div>
+
+                        <div class="education-item">
+                            <span>Class X (CBSE) — 2020</span>
+                            <h4>Secondary Education</h4>
+                            <p>Vidya Bharati Chinmaya Vidyalaya</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="section" id="skills">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="badge">TECHNICAL STACK</span>
+                    <h2>Skills & Tools</h2>
+                    <p>
+                        Focused on AWS Cloud, Web Engineering, Python,
+                        SQL & DevOps.
+                    </p>
+                </div>
+
+                <div class="skill-filters" aria-label="Filter skills">
+                    <button
+                        type="button"
+                        class="button button-secondary skill-filter"
+                        data-filter="all"
+                        aria-pressed="true"
+                    >
+                        All Skills
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-secondary skill-filter"
+                        data-filter="cloud"
+                        aria-pressed="false"
+                    >
+                        Cloud & DevOps
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-secondary skill-filter"
+                        data-filter="programming"
+                        aria-pressed="false"
+                    >
+                        Programming & DB
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-secondary skill-filter"
+                        data-filter="web"
+                        aria-pressed="false"
+                    >
+                        Web Development
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-secondary skill-filter"
+                        data-filter="tools"
+                        aria-pressed="false"
+                    >
+                        Tools
+                    </button>
+                </div>
+
+                <div class="skills-grid">
+                    <article class="card skill-card" data-category="cloud">
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i class="fab fa-aws" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>AWS Infrastructure</h3>
+                                <p>S3, CloudFront, Route 53</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card skill-card" data-category="cloud">
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i class="fas fa-cubes" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>AWS CDK (Python)</h3>
+                                <p>Infrastructure as Code</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card skill-card" data-category="cloud">
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>GitHub Actions</h3>
+                                <p>CI/CD Automation Pipelines</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article
+                        class="card skill-card"
+                        data-category="programming"
+                    >
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i class="fab fa-python" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>Python</h3>
+                                <p>NetworkX, Spectral Clustering, CDK</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article
+                        class="card skill-card"
+                        data-category="programming"
+                    >
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i
+                                    class="fas fa-database"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div>
+                                <h3>SQL</h3>
+                                <p>Relational Database Queries</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card skill-card" data-category="web">
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i class="fab fa-html5" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>HTML5 & CSS3</h3>
+                                <p>Responsive UI Layouts</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card skill-card" data-category="web">
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i class="fab fa-js" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>JavaScript (ES6+)</h3>
+                                <p>Interactive Web Applications</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card skill-card" data-category="tools">
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i class="fab fa-git-alt" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>Git, Figma & Blender</h3>
+                                <p>Version Control & Design Tools</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card skill-card" data-category="tools">
+                        <div class="skill-top">
+                            <div class="icon-box">
+                                <i
+                                    class="fas fa-diagram-project"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+                            <div>
+                                <h3>NetworkX & Gephi</h3>
+                                <p>Graph Analysis & Visualization</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section section-white" id="experience">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="badge">CAREER EXPERIENCE</span>
+                    <h2>Professional Experience</h2>
+                </div>
+
+                <div class="experience-list">
+                    <article class="card">
+                        <div class="experience-header">
+                            <div>
+                                <span class="badge">
+                                    Remote Summer Internship
+                                </span>
+                                <h3>Pexous LLC</h3>
+                                <p>Cloud & DevOps Summer Intern</p>
+                            </div>
+
+                            <span class="duration">1 Month Duration</span>
+                        </div>
+
+                        <ul class="check-list">
+                            <li>
+                                <i
+                                    class="fas fa-check-circle"
+                                    aria-hidden="true"
+                                ></i>
+                                <span>
+                                    Completed an internship focused on AWS
+                                    cloud architecture, DevOps, and Agile
+                                    methodologies.
+                                </span>
+                            </li>
+
+                            <li>
+                                <i
+                                    class="fas fa-check-circle"
+                                    aria-hidden="true"
+                                ></i>
+                                <span>
+                                    Built and deployed cloud infrastructure
+                                    stacks using
+                                    <strong>AWS CDK with Python</strong>.
+                                </span>
+                            </li>
+
+                            <li>
+                                <i
+                                    class="fas fa-check-circle"
+                                    aria-hidden="true"
+                                ></i>
+                                <span>
+                                    Established automated CI/CD deployment
+                                    pipelines utilizing
+                                    <strong>GitHub Actions</strong>.
+                                </span>
+                            </li>
+                        </ul>
+
+                        <div class="tags">
+                            <span class="tag">AWS CDK</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">GitHub Actions</span>
+                            <span class="tag">Agile Methodologies</span>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="experience-header">
+                            <div>
+                                <span class="badge">
+                                    International Project
+                                </span>
+                                <h3>YouTube & AI Content Creation</h3>
+                                <p>Singapore Client</p>
+                            </div>
+                        </div>
+
+                        <ul class="check-list">
+                            <li>
+                                <i
+                                    class="fas fa-check-circle"
+                                    aria-hidden="true"
+                                ></i>
+                                <span>
+                                    Created AI-assisted video content
+                                    workflows for a Singapore-based
+                                    client's YouTube channel.
+                                </span>
+                            </li>
+
+                            <li>
+                                <i
+                                    class="fas fa-check-circle"
+                                    aria-hidden="true"
+                                ></i>
+                                <span>
+                                    Designed video scripts and
+                                    scene-by-scene prompts to streamline
+                                    AI content creation.
+                                </span>
+                            </li>
+                        </ul>
+
+                        <div class="tags">
+                            <span class="tag">Prompt Workflows</span>
+                            <span class="tag">Scripting</span>
+                            <span class="tag">AI Content</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section" id="projects">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="badge">FEATURED WORK</span>
+                    <h2>Projects Portfolio</h2>
+                </div>
+
+                <div class="projects-grid">
+                    <article class="card project-card">
+                        <div>
+                            <span class="badge">Capstone Project</span>
+                            <h3>MusiNet</h3>
+
+                            <p class="project-tech">
+                                Python | NetworkX | Gephi
+                            </p>
+
+                            <p class="project-description">
+                                Graph-based music plagiarism detection
+                                project using Python and NetworkX.
+                                Applied Spectral Clustering to detect
+                                song communities and rendered
+                                visualizations in Gephi.
+                            </p>
+                        </div>
+
+                        <div class="project-actions">
+                            <button
+                                type="button"
+                                class="button button-secondary button-full"
+                                data-project="musinet"
+                            >
+                                View Architecture & Details
+                                <i
+                                    class="fas fa-arrow-right"
+                                    aria-hidden="true"
+                                ></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="card project-card">
+                        <div>
+                            <span class="badge">Web Studio Platform</span>
+                            <h3>Pixel Craft</h3>
+
+                            <p class="project-tech">
+                                HTML5 | CSS3 | JavaScript
+                            </p>
+
+                            <p class="project-description">
+                                Developed a responsive web platform
+                                featuring modern UI components and
+                                dynamic interactive features with
+                                cross-device compatibility.
+                            </p>
+                        </div>
+
+                        <div class="project-actions">
+                            <a
+                                href="https://sprihasahu.github.io/Pixelcraft-studio/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="button button-primary button-full"
+                            >
+                                <i
+                                    class="fas fa-external-link-alt"
+                                    aria-hidden="true"
+                                ></i>
+                                Live Platform
+                            </a>
+
+                            <button
+                                type="button"
+                                class="button button-secondary button-full"
+                                data-project="pixelcraft"
+                            >
+                                Project Details
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="card project-card">
+                        <div>
+                            <span class="badge">Corporate Website</span>
+                            <h3>Prime Digital Services</h3>
+
+                            <p class="project-tech">
+                                HTML5 | CSS3 | JavaScript
+                            </p>
+
+                            <p class="project-description">
+                                Built the official website for Prime
+                                Digital Services showcasing digital
+                                marketing offerings, service pages,
+                                company information, and contact channels.
+                            </p>
+                        </div>
+
+                        <div class="project-actions">
+                            <a
+                                href="https://primedigitalservices.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="button button-primary button-full"
+                            >
+                                <i
+                                    class="fas fa-external-link-alt"
+                                    aria-hidden="true"
+                                ></i>
+                                Visit Website
+                            </a>
+
+                            <button
+                                type="button"
+                                class="button button-secondary button-full"
+                                data-project="primedigital"
+                            >
+                                Project Details
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="section section-white" id="certifications">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="badge">QUALIFICATIONS</span>
+                    <h2>Certifications & Coursework</h2>
+                </div>
+
+                <div class="certifications-grid">
+                    <article class="card certification-card">
+                        <div class="icon-box">
+                            <i class="fab fa-google" aria-hidden="true"></i>
+                        </div>
+
+                        <h3>Gemini with Google Cloud</h3>
+                        <p>AI-driven cloud application development.</p>
+                        <small>Google Cloud</small>
+                    </article>
+
+                    <article class="card certification-card">
+                        <div class="icon-box">
+                            <i class="fas fa-pen-nib" aria-hidden="true"></i>
+                        </div>
+
+                        <h3>UI/UX Design</h3>
+                        <p>Website design using prompt workflows.</p>
+                        <small>Design Certification</small>
+                    </article>
+
+                    <article class="card certification-card">
+                        <div class="icon-box">
+                            <i class="fas fa-brain" aria-hidden="true"></i>
+                        </div>
+
+                        <h3>Prompt Engineering</h3>
+                        <p>Effective prompt design for LLMs.</p>
+                        <small>Great Learning</small>
+                    </article>
+
+                    <article class="card certification-card">
+                        <div class="icon-box">
+                            <i class="fas fa-cloud" aria-hidden="true"></i>
+                        </div>
+
+                        <h3>Innovating with Google Cloud AI</h3>
+                        <p>Fundamentals of AI/ML on Google Cloud.</p>
+                        <small>Google Cloud AI</small>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="section" id="contact">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="badge">GET IN TOUCH</span>
+                    <h2>Contact Spriha Sahu</h2>
+                </div>
+
+                <div class="contact-grid">
+                    <article class="card">
+                        <h3>Reach Out</h3>
+
+                        <p class="contact-intro">
+                            I am available for software engineering roles,
+                            cloud infrastructure projects, and web development.
+                        </p>
+
+                        <div class="contact-item">
+                            <div class="icon-box">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </div>
+
+                            <div class="contact-details">
+                                <small>GitHub</small>
+                                <a
+                                    href="https://github.com/sprihasahu"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    github.com/sprihasahu
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon-box">
+                                <i
+                                    class="fas fa-envelope"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+
+                            <div class="contact-details">
+                                <small>Email</small>
+                                <a href="mailto:sprihasahu@gmail.com">
+                                    sprihasahu@gmail.com
+                                </a>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="copy-button"
+                                data-copy="sprihasahu@gmail.com"
+                                aria-label="Copy email address"
+                            >
+                                <i class="fas fa-copy" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon-box">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                            </div>
+
+                            <div class="contact-details">
+                                <small>Phone</small>
+                                <a href="tel:+918235430590">
+                                    +91 8235430590
+                                </a>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="copy-button"
+                                data-copy="+918235430590"
+                                aria-label="Copy phone number"
+                            >
+                                <i class="fas fa-copy" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon-box">
+                                <i
+                                    class="fas fa-location-dot"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
+
+                            <div class="contact-details">
+                                <small>Location</small>
+                                <strong>
+                                    Jamshedpur, Jharkhand, India
+                                </strong>
+                            </div>
+                        </div>
+
+                        <a
+                            href="https://linkedin.com/in/spriha-sahu-81bb60257"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button button-secondary button-full"
+                        >
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            Connect on LinkedIn
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <h3>Send a Message</h3>
+
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="senderName">Name</label>
+                                    <input
+                                        type="text"
+                                        id="senderName"
+                                        name="name"
+                                        autocomplete="name"
+                                        placeholder="Your Name"
+                                        maxlength="100"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="senderEmail">Email</label>
+                                    <input
+                                        type="email"
+                                        id="senderEmail"
+                                        name="email"
+                                        autocomplete="email"
+                                        placeholder="your@email.com"
+                                        maxlength="254"
+                                        required
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    placeholder="Job Opportunity / Inquiry"
+                                    maxlength="150"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    placeholder="Your message details..."
+                                    maxlength="1500"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="button button-primary button-full"
+                            >
+                                <i
+                                    class="fas fa-paper-plane"
+                                    aria-hidden="true"
+                                ></i>
+                                Open Email Draft
+                            </button>
+
+                            <p class="form-note">
+                                Opens your configured email app. Review the
+                                draft and click Send there. If no app opens,
+                                email
+                                <a href="mailto:sprihasahu@gmail.com">
+                                    sprihasahu@gmail.com
+                                </a>
+                                directly.
+                            </p>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>
+                &copy; <span id="currentYear">2026</span>
+                Spriha Sahu. Portfolio Website.
+            </p>
+
+            <div class="footer-links">
+                <a
+                    href="https://github.com/sprihasahu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub
                 </a>
-                <a href="https://linkedin.com/in/spriha-sahu-81bb60257" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition-colors flex items-center gap-1">
-                    <i class="fab fa-linkedin"></i> LinkedIn
+
+                <a
+                    href="https://linkedin.com/in/spriha-sahu-81bb60257"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    LinkedIn
                 </a>
-                <a href="#home" class="hover:text-blue-600 transition-colors">Back to Top</a>
+
+                <a href="#home">Back to Top</a>
             </div>
         </div>
     </footer>
 
-    <!-- Notification Toast -->
-    <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full bg-slate-900 text-white text-xs shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 z-50">
-        <i class="fas fa-info-circle text-sky-400" id="toastIcon"></i>
-        <span id="toastMessage">Notification</span>
-    </div>
+    <!-- Notification -->
+    <div
+        class="toast"
+        id="toastNotification"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        hidden
+    ></div>
 
-    <!-- Project Modal Popup -->
-    <div id="projectModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="sd-card-light rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl">
-            <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-full bg-slate-100 text-slate-600 hover:text-slate-900">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="modalContent"></div>
-        </div>
-    </div>
+    <!-- Project details -->
+    <dialog id="projectModal" aria-labelledby="modalTitle">
+        <button
+            type="button"
+            class="modal-close"
+            id="closeModalBtn"
+            aria-label="Close project details"
+            autofocus
+        >
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+
+        <span class="badge" id="modalSubtitle"></span>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-description" id="modalDescription"></p>
+
+        <p class="small-label">Key Highlights</p>
+        <ul class="check-list" id="modalHighlights"></ul>
+
+        <p class="small-label">Tech Stack</p>
+        <div class="tags" id="modalTech"></div>
+
+        <div class="button-row modal-actions" id="modalActions"></div>
+    </dialog>
 
     <script>
-        // Light Mode Canvas Node Animation
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        "use strict";
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        // Footer year
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-                this.opacity = Math.random() * 0.3 + 0.15;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+        // Mobile navigation
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const menuBtnIcon = document.getElementById("menuBtnIcon");
 
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(0, 102, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        function setMobileMenu(open) {
+            mobileMenu.hidden = !open;
+
+            mobileMenuBtn.setAttribute(
+                "aria-expanded",
+                String(open)
+            );
+
+            mobileMenuBtn.setAttribute(
+                "aria-label",
+                open ? "Close navigation" : "Open navigation"
+            );
+
+            menuBtnIcon.className = open
+                ? "fas fa-xmark"
+                : "fas fa-bars";
         }
 
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.floor((canvas.width * canvas.height) / 20000);
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+        mobileMenuBtn.addEventListener("click", () => {
+            setMobileMenu(mobileMenu.hidden);
+        });
+
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                setMobileMenu(false);
+            });
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !mobileMenu.hidden) {
+                setMobileMenu(false);
+                mobileMenuBtn.focus();
             }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 1100) {
+                setMobileMenu(false);
+            }
+        });
+
+        // Skill filtering
+        const skillButtons = document.querySelectorAll(".skill-filter");
+        const skillCards = document.querySelectorAll(".skill-card");
+
+        skillButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const category = button.dataset.filter;
+
+                skillButtons.forEach((item) => {
+                    item.setAttribute(
+                        "aria-pressed",
+                        String(item === button)
+                    );
+                });
+
+                skillCards.forEach((card) => {
+                    card.hidden =
+                        category !== "all" &&
+                        card.dataset.category !== category;
+                });
+            });
+        });
+
+        // Notification toast
+        const toast = document.getElementById("toastNotification");
+        let toastTimer;
+
+        function showToast(message) {
+            window.clearTimeout(toastTimer);
+
+            toast.textContent = message;
+            toast.hidden = false;
+
+            toastTimer = window.setTimeout(() => {
+                toast.hidden = true;
+            }, 4000);
         }
-        initParticles();
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+        // Copy helper
+        function legacyCopy(text) {
+            const previousFocus = document.activeElement;
+            const textarea = document.createElement("textarea");
 
-                // Connect nearby nodes
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+            textarea.value = text;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.left = "-9999px";
+            textarea.style.top = "0";
 
-                    if (dist < 110) {
-                        ctx.strokeStyle = `rgba(2, 132, 199, ${0.12 * (1 - dist / 110)})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            let copied = false;
+
+            try {
+                copied = document.execCommand("copy");
+            } catch {
+                copied = false;
+            } finally {
+                textarea.remove();
+
+                if (previousFocus instanceof HTMLElement) {
+                    previousFocus.focus();
                 }
             }
-            requestAnimationFrame(animateParticles);
+
+            return copied;
         }
 
-        window.onload = function() {
-            animateParticles();
-        };
+        async function copyText(text) {
+            let copied = false;
 
-        // Mobile Nav Logic
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuBtnIcon = document.getElementById('menuBtnIcon');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.contains('hidden');
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-                menuBtnIcon.classList.remove('fa-bars');
-                menuBtnIcon.classList.add('fa-xmark');
+            if (navigator.clipboard && window.isSecureContext) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    copied = true;
+                } catch {
+                    copied = legacyCopy(text);
+                }
             } else {
-                mobileMenu.classList.add('hidden');
-                menuBtnIcon.classList.remove('fa-xmark');
-                menuBtnIcon.classList.add('fa-bars');
+                copied = legacyCopy(text);
             }
-        });
 
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuBtnIcon.classList.remove('fa-xmark');
-                menuBtnIcon.classList.add('fa-bars');
+            showToast(
+                copied
+                    ? "Copied to clipboard!"
+                    : "Unable to copy. Please select and copy the text manually."
+            );
+        }
+
+        document.querySelectorAll("[data-copy]").forEach((button) => {
+            button.addEventListener("click", () => {
+                copyText(button.dataset.copy);
             });
         });
 
-        // Filter Skills Logic
-        function filterSkills(category) {
-            const cards = document.querySelectorAll('.skill-card');
-            const btns = document.querySelectorAll('.skill-filter-btn');
+        // Contact form: open an email draft.
+        // This does not send an email automatically.
+        const contactForm = document.getElementById("contactForm");
 
-            btns.forEach(btn => {
-                btn.className = 'skill-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold btn-sd-secondary transition-all';
-            });
-
-            event.currentTarget.className = 'skill-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold btn-sd-primary shadow-sm transition-all';
-
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Notification Toast
-        function showToast(message, iconClass = 'fa-check-circle text-sky-400') {
-            const toast = document.getElementById('toastNotification');
-            const toastMsg = document.getElementById('toastMessage');
-            const toastIcon = document.getElementById('toastIcon');
-
-            toastMsg.innerText = message;
-            toastIcon.className = `fas ${iconClass}`;
-
-            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-            toast.classList.add('opacity-100', 'translate-y-0');
-
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-                toast.classList.remove('opacity-100', 'translate-y-0');
-            }, 3000);
-        }
-
-        // Copy Text Function
-        function copyText(text, successMsg) {
-            const tempInput = document.createElement('input');
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            showToast(successMsg, 'fa-copy text-sky-400');
-        }
-
-        // Contact Form Submission
-        function handleFormSubmit(event) {
+        contactForm.addEventListener("submit", (event) => {
             event.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.innerHTML;
 
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>`;
+            const name = document.getElementById("senderName").value.trim();
+            const email = document.getElementById("senderEmail").value.trim();
+            const subject = document.getElementById("subject").value.trim();
+            const message = document.getElementById("message").value.trim();
 
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-                document.getElementById('contactForm').reset();
-                showToast('Message sent successfully!', 'fa-paper-plane text-emerald-400');
-            }, 1200);
-        }
+            if (!name || !email || !subject || !message) {
+                showToast("Please complete all fields.");
+                return;
+            }
 
-        // Project Modal Details
+            if (!contactForm.reportValidity()) {
+                return;
+            }
+
+            const body = [
+                `Name: ${name}`,
+                `Email: ${email}`,
+                "",
+                message
+            ].join("\r\n");
+
+            const mailtoUrl =
+                "mailto:sprihasahu@gmail.com" +
+                "?subject=" + encodeURIComponent(subject) +
+                "&body=" + encodeURIComponent(body);
+
+            window.location.href = mailtoUrl;
+
+            showToast(
+                "Please send the draft from your email app. Your message has not been sent yet."
+            );
+
+            // Keep the form contents in case no email app is configured.
+        });
+
+        // Project information
         const projectDetails = {
             musinet: {
-                title: "MusiNet - Music Plagiarism Detection",
+                title: "MusiNet — Music Plagiarism Detection",
                 subtitle: "Python, NetworkX & Gephi",
-                description: "Built a graph-based music plagiarism detection system for over 1,000+ Hindi songs using Python and NetworkX. Applied Spectral Clustering algorithms to discover song communities and visualized relations via Gephi.",
+                description:
+                    "A graph-based music analysis project using Python " +
+                    "and NetworkX. Spectral Clustering identifies song " +
+                    "communities, while Gephi helps visualize relationships.",
                 highlights: [
-                    "Constructed graph network databases for 1,000+ Hindi song samples.",
-                    "Applied Spectral Clustering algorithms for plagiarism similarity metrics.",
-                    "Analyzed song relationship graph clusters in Gephi."
+                    "Constructed graph representations of song relationships.",
+                    "Applied Spectral Clustering to discover song communities.",
+                    "Analyzed and visualized relationship networks in Gephi."
                 ],
-                tech: ["Python", "NetworkX", "Spectral Clustering", "Gephi"],
+                tech: [
+                    "Python",
+                    "NetworkX",
+                    "Spectral Clustering",
+                    "Gephi"
+                ],
                 github: "https://github.com/sprihasahu",
+                githubLabel: "GitHub Profile",
                 link: null
             },
+
             pixelcraft: {
                 title: "Pixel Craft Web Platform",
                 subtitle: "Responsive Web Studio",
-                description: "Developed a modern, responsive web platform featuring structured UI layout components and dynamic interactive features with full cross-device compatibility.",
+                description:
+                    "A responsive web platform featuring structured UI " +
+                    "components and interactive features across desktop, " +
+                    "tablet, and mobile screens.",
                 highlights: [
-                    "Structured interface designed with clean semantic HTML5 & CSS3.",
-                    "Dynamic client-side features powered by modern JavaScript (ES6+).",
-                    "Fully mobile-responsive, fluid layout structure."
+                    "Structured interface using HTML5 and CSS3.",
+                    "Interactive client-side features using JavaScript.",
+                    "Responsive layouts deployed with GitHub Pages."
                 ],
-                tech: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
-                github: "https://github.com/sprihasahu/Pixelcraft-studio",
-                link: "https://sprihasahu.github.io/Pixelcraft-studio/"
+                tech: [
+                    "HTML5",
+                    "CSS3",
+                    "JavaScript",
+                    "GitHub Pages"
+                ],
+                github:
+                    "https://github.com/sprihasahu/Pixelcraft-studio",
+                githubLabel: "GitHub Repository",
+                link:
+                    "https://sprihasahu.github.io/Pixelcraft-studio/"
             },
+
             primedigital: {
                 title: "Prime Digital Services",
-                subtitle: "Corporate Business Web Portal",
-                description: "Created the official web presence for Prime Digital Services showcasing digital marketing capabilities, service pages, corporate information, and inquiry forms.",
+                subtitle: "Corporate Business Website",
+                description:
+                    "A business website showcasing digital marketing " +
+                    "services, company information, and contact channels.",
                 highlights: [
-                    "Structured service catalogs and company information pages.",
-                    "Responsive layout design across mobile, tablet, and desktop viewports.",
-                    "Interactive forms and clean component structure."
+                    "Structured service and company information pages.",
+                    "Responsive layout for mobile, tablet, and desktop.",
+                    "Clear navigation and accessible contact information."
                 ],
-                tech: ["HTML5", "CSS3", "JavaScript"],
+                tech: [
+                    "HTML5",
+                    "CSS3",
+                    "JavaScript"
+                ],
                 github: "https://github.com/sprihasahu",
-                link: "https://primedigitalservices.com"
+                githubLabel: "GitHub Profile",
+                link: "https://primedigitalservices.com/"
             }
         };
 
+        // Project modal
+        const projectModal = document.getElementById("projectModal");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        let previousModalFocus = null;
+
+        function createProjectLink(url, label, primary) {
+            const link = document.createElement("a");
+
+            link.href = url;
+            link.textContent = label;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+
+            link.className = primary
+                ? "button button-primary"
+                : "button button-secondary";
+
+            return link;
+        }
+
         function openProjectModal(key) {
             const data = projectDetails[key];
-            if (!data) return;
 
-            const modal = document.getElementById('projectModal');
-            const content = document.getElementById('modalContent');
+            if (!data) {
+                return;
+            }
 
-            let actionButtons = `<div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap gap-3">`;
+            previousModalFocus = document.activeElement;
+
+            document.getElementById("modalTitle").textContent = data.title;
+            document.getElementById("modalSubtitle").textContent =
+                data.subtitle;
+            document.getElementById("modalDescription").textContent =
+                data.description;
+
+            const highlights = document.getElementById("modalHighlights");
+            highlights.replaceChildren();
+
+            data.highlights.forEach((text) => {
+                const item = document.createElement("li");
+                const icon = document.createElement("i");
+                const content = document.createElement("span");
+
+                icon.className = "fas fa-check-circle";
+                icon.setAttribute("aria-hidden", "true");
+                content.textContent = text;
+
+                item.append(icon, content);
+                highlights.appendChild(item);
+            });
+
+            const tech = document.getElementById("modalTech");
+            tech.replaceChildren();
+
+            data.tech.forEach((name) => {
+                const tag = document.createElement("span");
+
+                tag.className = "tag";
+                tag.textContent = name;
+
+                tech.appendChild(tag);
+            });
+
+            const actions = document.getElementById("modalActions");
+            actions.replaceChildren();
+
             if (data.link) {
-                actionButtons += `
-                    <a href="${data.link}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl btn-sd-primary font-semibold text-xs flex items-center gap-2">
-                        <span>Visit Live Site</span>
-                        <i class="fas fa-external-link-alt text-[10px]"></i>
-                    </a>
-                `;
+                actions.appendChild(
+                    createProjectLink(
+                        data.link,
+                        "Visit Live Site",
+                        true
+                    )
+                );
             }
+
             if (data.github) {
-                actionButtons += `
-                    <a href="${data.github}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl btn-sd-secondary font-semibold text-xs flex items-center gap-2">
-                        <i class="fab fa-github text-sm"></i>
-                        <span>GitHub Repository</span>
-                    </a>
-                `;
+                actions.appendChild(
+                    createProjectLink(
+                        data.github,
+                        data.githubLabel,
+                        false
+                    )
+                );
             }
-            actionButtons += `</div>`;
 
-            content.innerHTML = `
-                <div class="mb-4">
-                    <span class="px-3 py-1 rounded-full text-xs font-mono bg-blue-50 text-blue-700 border border-blue-200">${data.subtitle}</span>
-                    <h3 class="text-2xl font-bold text-slate-900 mt-3">${data.title}</h3>
-                </div>
-                <p class="text-slate-600 text-xs leading-relaxed mb-6">${data.description}</p>
-                <div class="mb-6">
-                    <h4 class="text-[10px] font-mono uppercase text-slate-400 tracking-wider mb-3">Key Highlights</h4>
-                    <ul class="space-y-2 text-xs text-slate-600">
-                        ${data.highlights.map(h => `<li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-600 mt-0.5"></i><span>${h}</span></li>`).join('')}
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-[10px] font-mono uppercase text-slate-400 tracking-wider mb-3">Tech Stack</h4>
-                    <div class="flex flex-wrap gap-2">
-                        ${data.tech.map(t => `<span class="px-2.5 py-1 rounded-lg bg-slate-100 text-xs font-mono text-slate-700">${t}</span>`).join('')}
-                    </div>
-                </div>
-                ${actionButtons}
-            `;
-
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('opacity-100');
+            document.body.classList.add("modal-open");
+            projectModal.showModal();
         }
 
         function closeProjectModal() {
-            const modal = document.getElementById('projectModal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.classList.remove('opacity-100');
+            projectModal.close();
         }
 
-        document.getElementById('projectModal').addEventListener('click', (e) => {
-            if (e.target.id === 'projectModal') closeProjectModal();
+        document.querySelectorAll("[data-project]").forEach((button) => {
+            button.addEventListener("click", () => {
+                openProjectModal(button.dataset.project);
+            });
         });
+
+        closeModalBtn.addEventListener("click", closeProjectModal);
+
+        projectModal.addEventListener("close", () => {
+            document.body.classList.remove("modal-open");
+
+            if (previousModalFocus instanceof HTMLElement) {
+                previousModalFocus.focus();
+            }
+        });
+
+        projectModal.addEventListener("click", (event) => {
+            if (event.target !== projectModal) {
+                return;
+            }
+
+            const rect = projectModal.getBoundingClientRect();
+
+            const clickedOutside =
+                event.clientX < rect.left ||
+                event.clientX > rect.right ||
+                event.clientY < rect.top ||
+                event.clientY > rect.bottom;
+
+            if (clickedOutside) {
+                closeProjectModal();
+            }
+        });
+
+        // Hero particle animation
+        (() => {
+            const canvas = document.getElementById("particleCanvas");
+            const context = canvas.getContext("2d");
+
+            if (!context) {
+                return;
+            }
+
+            const reducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+            let width = 0;
+            let height = 0;
+            let particles = [];
+            let animationId = null;
+            let heroVisible = true;
+            let lastTime = 0;
+
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+                width = rect.width;
+                height = rect.height;
+
+                canvas.width = Math.round(width * pixelRatio);
+                canvas.height = Math.round(height * pixelRatio);
+
+                context.setTransform(
+                    pixelRatio,
+                    0,
+                    0,
+                    pixelRatio,
+                    0,
+                    0
+                );
+
+                const count = Math.min(
+                    65,
+                    Math.floor((width * height) / 20000)
+                );
+
+                particles = Array.from({ length: count }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.4,
+                    speedY: (Math.random() - 0.5) * 0.4,
+                    opacity: Math.random() * 0.3 + 0.15
+                }));
+
+                if (reducedMotion.matches) {
+                    drawParticles(0);
+                }
+            }
+
+            function drawParticles(step) {
+                context.clearRect(0, 0, width, height);
+
+                particles.forEach((particle) => {
+                    particle.x += particle.speedX * step;
+                    particle.y += particle.speedY * step;
+
+                    if (particle.x < 0) particle.x = width;
+                    if (particle.x > width) particle.x = 0;
+                    if (particle.y < 0) particle.y = height;
+                    if (particle.y > height) particle.y = 0;
+
+                    context.fillStyle =
+                        `rgba(0, 102, 255, ${particle.opacity})`;
+
+                    context.beginPath();
+
+                    context.arc(
+                        particle.x,
+                        particle.y,
+                        particle.size,
+                        0,
+                        Math.PI * 2
+                    );
+
+                    context.fill();
+                });
+
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.hypot(dx, dy);
+
+                        if (distance < 110) {
+                            const opacity = 0.12 * (1 - distance / 110);
+
+                            context.strokeStyle =
+                                `rgba(2, 132, 199, ${opacity})`;
+
+                            context.lineWidth = 0.6;
+                            context.beginPath();
+                            context.moveTo(particles[i].x, particles[i].y);
+                            context.lineTo(particles[j].x, particles[j].y);
+                            context.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate(time) {
+                const step = lastTime
+                    ? Math.min((time - lastTime) / 16.67, 2)
+                    : 1;
+
+                lastTime = time;
+                drawParticles(step);
+                animationId = window.requestAnimationFrame(animate);
+            }
+
+            function updateAnimationState() {
+                const shouldAnimate =
+                    !reducedMotion.matches &&
+                    !document.hidden &&
+                    heroVisible;
+
+                if (shouldAnimate && animationId === null) {
+                    lastTime = 0;
+                    animationId = window.requestAnimationFrame(animate);
+                } else if (!shouldAnimate && animationId !== null) {
+                    window.cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+
+                if (reducedMotion.matches) {
+                    drawParticles(0);
+                }
+            }
+
+            window.addEventListener("resize", resizeCanvas);
+            document.addEventListener(
+                "visibilitychange",
+                updateAnimationState
+            );
+
+            reducedMotion.addEventListener(
+                "change",
+                updateAnimationState
+            );
+
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    heroVisible = entries[0].isIntersecting;
+                    updateAnimationState();
+                });
+
+                observer.observe(document.getElementById("home"));
+            }
+
+            resizeCanvas();
+            updateAnimationState();
+        })();
     </script>
 </body>
 </html>
